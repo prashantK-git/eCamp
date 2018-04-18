@@ -1,0 +1,26 @@
+<html>
+<header>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</header>
+<body>
+<button id='btn'>click me</button>
+<script>
+$(document).ready(function(){
+  $('#btn').click(function() {
+    $.ajax({
+      type: 'GET',
+      url: "http://localhost:8080/alerts.js",
+      origin:"http://localhost:8081",
+      contentType: "application/json",
+      success: function(result){
+        console.log(result);
+    }});
+  })
+})
+</script>
+</body>
+</html>
