@@ -1,17 +1,49 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { actionCreators } from '../actions/index';
-import Home from './home';
-import {View} from 'react-native';
+import { NativeRouter as Router, Route, Switch } from 'react-router-native';
+import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
+import Login from './loginContainer';
+import Base from './baseContainer';
 
 class AppContainer extends Component {
+  static childContextTypes = {
+    user:PropTypes.object
+  }
+  getChildContext = ()=> ({
+    user: {}
+  })
+
+  constructor(props){
+    super(props);
+    console.log("actions:"+ this.props)
+  }
+
   render(){
-    return <Home {...this.props}/>
+    return <Router >
+                <View style={{flex:1}} {...this.props}>
+                    <Switch>
+                     <Route exact path='/' render = { () => {
+                       return <Login {...this.props} />
+                     }}/>
+                     <Route path='/base' render = {() => {
+                       return <Base {...this.props} defaultView = '/home'/>
+                     }}/>
+                     <Route path='/overlay' render = {() => {
+                       return <View style={{backgroundColor: 'black', opacity:.2, flex: 1}}><Text style={{color:'red', fontSize:40}}>overlay</Text></View>
+                     }}/>
+                    </Switch>
+                </View>
+          </Router>
+
   }
 }
-// empty state passed
-mapStateToProps= (state) => ({})
+//empty state passed
+mapStateToProps= (state) => ({
+  navigateParam: state.navigateTo
+});
 
 function mapDispatchToProps( dispatch ) {
   return bindActionCreators(actionCreators,dispatch);
