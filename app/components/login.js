@@ -25,14 +25,8 @@ class Login extends Component{
   // }
   handleLogin(options){
     console.log('login pressed');
-    this.setState({ isSearching: true });
-    this.props.login(options).then( (isloginSuccess) => {
-      console.log('login completed');
-      this.setState({ isSearching: true });
-      if(isloginSuccess){
-        this.props.history.push({pathname:'/overlay', state: {}});
-      }
-    });
+    setTimeout( function(){this.props.history.push({pathname:'/base', state: {}})}.bind(this),5000);
+
   }
 
   checkLoginSatus() {

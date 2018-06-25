@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { TabRoutes, TabRoute } from './core/TabRoutes';
 import { NativeRouter as Router, Route, Redirect } from 'react-router-native';
+import Home from './home';
+import StudentList from './studentList';
+import Settings from './settings';
 
 export default class Base extends Component {
   constructor(props){
@@ -15,11 +18,7 @@ export default class Base extends Component {
               <TabRoutes>
                   <TabRoute path="/home"
                     renderContent={(props) => (
-                      <View>
-                        <Text style={{ fontSize: 30 }}>
-                          Home
-                        </Text>
-                      </View>
+                      <Home {...this.props}/>
                     )}
                     renderTab={({ isActive }) => (
                       <Text style={{ color: isActive ? 'blue' : null }}>
@@ -28,35 +27,27 @@ export default class Base extends Component {
                     )}
                   />
 
-                  <TabRoute path="/notifications"
+                  <TabRoute path="/studentList"
                     renderContent={(props) => (
-                      <View>
-                        <Text style={{ fontSize: 30 }}>
-                          Notifications
-                        </Text>
-                      </View>
+                      <StudentList {...this.props}/>
                     )}
                     renderTab={({ isActive }) => (
-                      <Text style={{ color: isActive ? 'blue' : null }}>
-                        Notifications
-                      </Text>
+                        <Text style={{ color: isActive ? 'blue' : null}}>
+                          Students
+                        </Text>
                     )}
                   />
 
-                  <TabRoute path="/messages"
+                  <TabRoute path="/settings"
                     renderContent={(props) => (
-                      <View>
-                        <Text style={{ fontSize: 30 }}>
-                          Messages
-                        </Text>
-                      </View>
+                      <Settings {...this.props}/>
                     )}
                     renderTab={({ isActive }) => (
                       <Text style={{ color: isActive ? 'blue' : null }}>
-                        Messages
+                        Settings
                       </Text>
                     )}
-                    
+
                   />
               </TabRoutes>
             </View>

@@ -7,6 +7,7 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Login from './loginContainer';
 import Base from './baseContainer';
+import StudentList from './studentContainer';
 
 class AppContainer extends Component {
   static childContextTypes = {
@@ -31,8 +32,8 @@ class AppContainer extends Component {
                      <Route path='/base' render = {() => {
                        return <Base {...this.props} defaultView = '/home'/>
                      }}/>
-                     <Route path='/overlay' render = {() => {
-                       return <View style={{backgroundColor: 'black', opacity:.2, flex: 1}}><Text style={{color:'red', fontSize:40}}>overlay</Text></View>
+                     <Route path='/studentList' render = {() => {
+                       return <StudentList {...this.props}/>
                      }}/>
                     </Switch>
                 </View>
